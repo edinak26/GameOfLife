@@ -1,6 +1,6 @@
 import java.util.List;
 
-public class InputValidator {
+public class InputValidator implements ValidateMessages {
     private final List<String> input;
 
     public InputValidator(List<String> input){
@@ -28,13 +28,13 @@ public class InputValidator {
     private void validateSize() {
         String sizeLine = getSizeLine();
         if(!sizeLine.matches("$[0-9]+ [0-9]+^"))
-            throw new RuntimeException("Incorrect input file format"); //TODO create special exception
+            throw new IncorrectInputFileFormatException(INCORRECT_SIZE_LINE_FORMAT);
     }
 
     private void validateIterations() {
         String iterationsLine = getIterationsLine();
         if(!iterationsLine.matches("$[0-9]+^"))
-            throw new RuntimeException("Incorrect input file format"); //TODO create special exception
+            throw new IncorrectInputFileFormatException(INCORRECT_ITERATIONS_LINE_FORMAT);
     }
 
     private void validateField() {
@@ -47,16 +47,20 @@ public class InputValidator {
 
     private void validateFieldCharacters(List<String> fieldLines) {
         for(String fieldLine : fieldLines){
-            if(!fieldLine.matches("([OX])+"))
-                throw new RuntimeException("Incorrect input file format"); //TODO create special exception
+            if(!fieldLine.matches("([OX])+")) {
+                int lineNumber = fieldLines.indexOf(fieldLine) + 1;
+                throw new IncorrectInputFileFormatException(INCORRECT_FIELD_CHARACTERS_IN + lineNumber);
+            }
         }
     }
 
     private void validateFieldWidth(List<String> fieldLines) {
         int width = fieldLines.get(2).length();
         for(String fieldLine : fieldLines){
-            if(fieldLine.length()!=width)
-                throw new RuntimeException("Incorrect input file format"); //TODO create special exception
+            if(fieldLine.length()!=width) {
+                int lineNumber = fieldLines.indexOf(fieldLine) + 1;
+                throw new IncorrectInputFileFormatException(INCORRECT_FIELD_WIDTH_IN + lineNumber);
+            }
         }
     }
 
