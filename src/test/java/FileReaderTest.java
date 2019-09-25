@@ -1,7 +1,6 @@
+import field.FileReader;
 import org.junit.Test;
 
-import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
