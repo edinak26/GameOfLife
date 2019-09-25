@@ -7,7 +7,7 @@ public class InputParser {
     private int height;
     private int width;
     private int iterations;
-    private Cell[][] startGreed;
+    private Cell[][] inputGreed;
 
     public InputParser(List<String> input){
             validator = new InputValidator(input);
@@ -17,7 +17,7 @@ public class InputParser {
         validator.validate();
         parseSize(validator.getSizeLine());
         parseIterations(validator.getIterationsLine());
-        parseStartField(validator.getFieldLines());
+        parseInputGreed(validator.getGreedLines());
     }
 
     private void parseSize(String sizeLine) {
@@ -30,18 +30,18 @@ public class InputParser {
         iterations = Integer.parseInt(iterationsLine);
     }
 
-    private void parseStartField(List<String> fieldLines){
-        int height = fieldLines.size();
-        int width = fieldLines.get(0).length();
-        Cell[][] startGreed = new Cell[height][width];
+    private void parseInputGreed(List<String> greedLines){
+        int height = greedLines.size();
+        int width = greedLines.get(0).length();
+        Cell[][] inputGreed = new Cell[height][width];
 
         for(int i = 0; i<height;i++){
-            String[] cells = fieldLines.get(i).split("");
+            String[] cells = greedLines.get(i).split("");
             for(int j = 0; j<width;j++){
-                startGreed[i][j] = Cell.valueOfCharacter(cells[j]);
+                inputGreed[i][j] = Cell.valueOfCharacter(cells[j]);
             }
         }
-        this.startGreed=startGreed;
+        this.inputGreed = inputGreed;
     }
 
     public int getHeight() {
@@ -56,7 +56,7 @@ public class InputParser {
         return iterations;
     }
 
-    public Cell[][] getStartGreed() {
-        return startGreed;
+    public Cell[][] getInputGreed() {
+        return inputGreed;
     }
 }

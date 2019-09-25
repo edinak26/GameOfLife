@@ -3,7 +3,7 @@ package field;
 import java.util.List;
 
 public class InputValidator implements ValidateMessages {
-    private static int FIELD_FIRST_LINE_NUMBER = 3;
+    private static int GREED_FIRST_LINE_NUMBER = 3;
 
     private final List<String> input;
 
@@ -14,7 +14,7 @@ public class InputValidator implements ValidateMessages {
     public void validate(){
         validateSize();
         validateIterations();
-        validateField();
+        validateGreed();
     }
 
     private void validateSize() {
@@ -29,31 +29,31 @@ public class InputValidator implements ValidateMessages {
             throw new IncorrectInputFileFormatException(ValidateMessages.INCORRECT_ITERATIONS_LINE_FORMAT);
     }
 
-    private void validateField() {
-        List<String> fieldLines = getFieldLines();
-        validateFieldCharacters(fieldLines);
-        validateFieldWidth(fieldLines);
+    private void validateGreed() {
+        List<String> greedLines = getGreedLines();
+        validateGreedCharacters(greedLines);
+        validateGreedWidth(greedLines);
 
 
     }
 
-    private void validateFieldCharacters(List<String> fieldLines) {
-        for(String fieldLine : fieldLines){
-            if(!fieldLine.matches("^[OX]+$")) {
-                int fieldLineIndex = fieldLines.indexOf(fieldLine);
-                int lineNumber = FIELD_FIRST_LINE_NUMBER + fieldLineIndex;
-                throw new IncorrectInputFileFormatException(ValidateMessages.INCORRECT_FIELD_CHARACTERS_IN + lineNumber);
+    private void validateGreedCharacters(List<String> greedLines) {
+        for(String greedLine : greedLines){
+            if(!greedLine.matches("^[OX]+$")) {
+                int greedLineIndex = greedLines.indexOf(greedLine);
+                int lineNumber = GREED_FIRST_LINE_NUMBER + greedLineIndex;
+                throw new IncorrectInputFileFormatException(ValidateMessages.INCORRECT_GREED_CHARACTERS_IN + lineNumber);
             }
         }
     }
 
-    private void validateFieldWidth(List<String> fieldLines) {
-        int width = fieldLines.get(0).length();
-        for(String fieldLine : fieldLines){
-            if(fieldLine.length()!=width) {
-                int fieldLineIndex = fieldLines.indexOf(fieldLine);
-                int lineNumber = FIELD_FIRST_LINE_NUMBER + fieldLineIndex;
-                throw new IncorrectInputFileFormatException(ValidateMessages.INCORRECT_FIELD_WIDTH_IN + lineNumber);
+    private void validateGreedWidth(List<String> greedLines) {
+        int width = greedLines.get(0).length();
+        for(String greedLine : greedLines){
+            if(greedLine.length()!=width) {
+                int greedLineIndex = greedLines.indexOf(greedLine);
+                int lineNumber = GREED_FIRST_LINE_NUMBER + greedLineIndex;
+                throw new IncorrectInputFileFormatException(ValidateMessages.INCORRECT_GREED_WIDTH_IN + lineNumber);
             }
         }
     }
@@ -66,7 +66,7 @@ public class InputValidator implements ValidateMessages {
         return input.get(1);
     }
 
-    public List<String> getFieldLines(){
+    public List<String> getGreedLines(){
         return input.subList(2,input.size());
     }
 }
