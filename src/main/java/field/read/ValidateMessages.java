@@ -1,4 +1,4 @@
-package field;
+package field.read;
 
 public interface ValidateMessages {
     String DEFAULT_INCORRECT_FILE_FORMAT = "\nIncorrect format of input.txt ";

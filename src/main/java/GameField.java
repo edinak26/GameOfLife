@@ -1,8 +1,4 @@
 import field.Cell;
-import field.FileReader;
-import field.InputValidator;
-
-import java.util.List;
 
 import static field.Cell.DEAD;
 
@@ -31,19 +27,4 @@ public class GameField {
             System.out.println();
         }
     }
-
-
-    /*
-    public GameField construct(){
-        InputValidator validator = new InputValidator(FileReader.readInputFile());
-        validator.validate();
-        String[] sizeLine = validator.getSizeLine().split(" ");
-        int height = Integer.parseInt(sizeLine[0]);
-        int width = Integer.parseInt(sizeLine[1]);
-        greed = new int[height][width];
-        String iterationsLine = validator.getIterationsLine();
-        int iterations = Integer.parseInt(iterationsLine);
-        List<String> startingField = validator.getFieldLines();
-        return null;
-    }*/
 }

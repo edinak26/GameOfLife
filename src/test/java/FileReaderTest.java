@@ -1,4 +1,4 @@
-import field.FileReader;
+import field.read.FileReader;
 import org.junit.Test;
 
 import java.util.Arrays;

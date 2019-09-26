@@ -1,12 +1,12 @@
-import field.FileReader;
-import field.InputParser;
+import field.read.FileReader;
+import field.read.InputParser;
 
 public class Main {
     public static void main(String[] args){
-        //field.InputValidator validator = new field.InputValidator(field.FileReader.readInputFile());
+        //field.read.InputValidator validator = new field.read.InputValidator(field.read.FileReader.readInputFile());
         InputParser parser = new InputParser(FileReader.readInputFile());
         parser.parse();
-        new GameField(parser.getHeight(),parser.getWidth(),parser.getInputGreed());
+        //new GameField(parser.getHeight(),parser.getWidth(),parser.getInputGreed());
         //validator.validate();
     }
 }

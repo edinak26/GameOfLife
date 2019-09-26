@@ -1,6 +1,6 @@
-package field;
+package field.read;
 
-import field.ValidateMessages;
+import field.read.ValidateMessages;
 
 public class IncorrectInputFileFormatException extends RuntimeException implements ValidateMessages {
     public IncorrectInputFileFormatException(String message){
