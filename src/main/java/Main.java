@@ -6,7 +6,7 @@ public class Main {
         //field.read.InputValidator validator = new field.read.InputValidator(field.read.FileReader.readInputFile());
         InputParser parser = new InputParser(FileReader.readInputFile());
         parser.parse();
-        //new GameField(parser.getHeight(),parser.getWidth(),parser.getInputGreed());
+        //new GameField(parser.getHeight(),parser.getWidth(),parser.getInputGrid());
         //validator.validate();
     }
 }

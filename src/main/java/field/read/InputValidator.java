@@ -14,7 +14,7 @@ public class InputValidator implements ValidateMessages {
     public void validate(){
         validateSize();
         validateIterations();
-        validateGreed();
+        validateGrid();
     }
 
     private void validateSize() {
@@ -29,30 +29,30 @@ public class InputValidator implements ValidateMessages {
             throw new IncorrectInputFileFormatException(ValidateMessages.INCORRECT_ITERATIONS_LINE_FORMAT);
     }
 
-    private void validateGreed() {
-        List<String> greedLines = getGreedLines();
-        validateGreedCharacters(greedLines);
-        validateGreedWidth(greedLines);
+    private void validateGrid() {
+        List<String> gridLines = getGridLines();
+        validateGridCharacters(gridLines);
+        validateGridWidth(gridLines);
 
 
     }
 
-    private void validateGreedCharacters(List<String> greedLines) {
-        for(String greedLine : greedLines){
-            if(!greedLine.matches("^[OX]+$")) {
-                int greedLineIndex = greedLines.indexOf(greedLine);
-                int lineNumber = GREED_FIRST_LINE_NUMBER + greedLineIndex;
+    private void validateGridCharacters(List<String> gridLines) {
+        for(String gridLine : gridLines){
+            if(!gridLine.matches("^[OX]+$")) {
+                int gridLineIndex = gridLines.indexOf(gridLine);
+                int lineNumber = GREED_FIRST_LINE_NUMBER + gridLineIndex;
                 throw new IncorrectInputFileFormatException(ValidateMessages.INCORRECT_GREED_CHARACTERS_IN + lineNumber);
             }
         }
     }
 
-    private void validateGreedWidth(List<String> greedLines) {
-        int width = greedLines.get(0).length();
-        for(String greedLine : greedLines){
-            if(greedLine.length()!=width) {
-                int greedLineIndex = greedLines.indexOf(greedLine);
-                int lineNumber = GREED_FIRST_LINE_NUMBER + greedLineIndex;
+    private void validateGridWidth(List<String> gridLines) {
+        int width = gridLines.get(0).length();
+        for(String gridLine : gridLines){
+            if(gridLine.length()!=width) {
+                int gridLineIndex = gridLines.indexOf(gridLine);
+                int lineNumber = GREED_FIRST_LINE_NUMBER + gridLineIndex;
                 throw new IncorrectInputFileFormatException(ValidateMessages.INCORRECT_GREED_WIDTH_IN + lineNumber);
             }
         }
@@ -66,7 +66,7 @@ public class InputValidator implements ValidateMessages {
         return input.get(1);
     }
 
-    public List<String> getGreedLines(){
+    public List<String> getGridLines(){
         return input.subList(2,input.size());
     }
 }

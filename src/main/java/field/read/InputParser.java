@@ -8,7 +8,7 @@ public class InputParser {
     private int parsedHeight;
     private int parsedWidth;
     private int parsedIterations;
-    private List<String[]> parsedInputGreed;
+    private List<String[]> parsedInputGrid;
 
     public InputParser(List<String> input){
             validator = new InputValidator(input);
@@ -18,7 +18,8 @@ public class InputParser {
         validator.validate();
         parseSize(validator.getSizeLine());
         parseIterations(validator.getIterationsLine());
-        parseInputGreed(validator.getGreedLines());
+        parseInputGrid(validator.getGridLines());
+        checkSize();
     }
 
     private void parseSize(String sizeLine) {
@@ -31,10 +32,18 @@ public class InputParser {
         parsedIterations = Integer.parseInt(iterationsLine);
     }
 
-    private void parseInputGreed(List<String> greedLines){
-        parsedInputGreed = greedLines.stream()
+    private void parseInputGrid(List<String> gridLines){
+        parsedInputGrid = gridLines.stream()
                 .map(line->line.split(""))
                 .collect(Collectors.toList());
+    }
+
+    private void checkSize() {
+        int inputGridHeight = parsedInputGrid.size();
+        int inputGridWidth = parsedInputGrid.get(0).length;
+        boolean isInputGridFitResultGrid = inputGridHeight<=parsedHeight && inputGridWidth<=parsedWidth;
+        if(!isInputGridFitResultGrid)
+            throw new RuntimeException();
     }
 
     public int getHeight() {
@@ -49,7 +58,7 @@ public class InputParser {
         return parsedIterations;
     }
 
-    public List<String[]> getInputGreed() {
-        return parsedInputGreed;
+    public List<String[]> getInputGrid() {
+        return parsedInputGrid;
     }
 }
