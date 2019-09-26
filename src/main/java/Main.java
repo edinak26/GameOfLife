@@ -1,12 +1,17 @@
+import field.Grid;
 import field.read.FileReader;
 import field.read.InputParser;
 
 public class Main {
     public static void main(String[] args){
-        //field.read.InputValidator validator = new field.read.InputValidator(field.read.FileReader.readInputFile());
         InputParser parser = new InputParser(FileReader.readInputFile());
         parser.parse();
-        //new GameField(parser.getHeight(),parser.getWidth(),parser.getInputGrid());
-        //validator.validate();
+        Grid inputGrid = new Grid(parser.getInputGrid());
+        Grid grid = new Grid(inputGrid,parser.getHeight(),parser.getWidth());
+        grid.print();
+        GameField field = new GameField(grid,1);
+        Grid nextGrid = field.getNextIterationGrid();
+        System.out.println();
+        nextGrid.print();
     }
 }

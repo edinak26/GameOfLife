@@ -5,7 +5,7 @@ import java.util.List;
 import static field.Cell.DEAD;
 
 public class Grid {
-    Cell[][] grid;
+    private Cell[][] grid;
 
     public Grid(int height, int width) {
         createEmptyGrid(height, width);
@@ -34,7 +34,7 @@ public class Grid {
     private void fillGridByInputGrid(List<String[]> inputGrid) {
         for (int i = 0; i < getHeight(); i++) {
             for (int j = 0; j < getWidth(); j++) {
-                grid[i][j] = Cell.valueOf(inputGrid.get(i)[j]);
+                grid[i][j] = Cell.valueOfCharacter(inputGrid.get(i)[j]);
             }
         }
     }
@@ -61,5 +61,40 @@ public class Grid {
 
     public int getWidth() {
         return grid[0].length;
+    }
+
+    public void print() {
+        for(int i = 0;i < getHeight();i++){
+            for(int j=0; j<getWidth();j++){
+                System.out.print(grid[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+    public Cell getCell(int x, int y) {
+        return grid[x][y];
+    }
+
+    public void setCell(int x, int y, Cell cell) {
+        grid[x][y] = cell;
+    }
+
+    public int getNeighbourValue(int x, int y) {
+        int neighbourValue = 0;
+        for(int i=-1;i<=1;i++){
+            for(int j=-1;j<=1;j++){
+                neighbourValue+=getCellValue(i+x,j+y);
+            }
+        }
+        return neighbourValue - grid[x][y].getValue();
+    }
+
+    private int getCellValue(int x,int y){
+        boolean isCellInsideGrid = x>=0&&x<getHeight()&&y>=0&&y<getWidth();
+        if(isCellInsideGrid)
+            return grid[x][y].getValue();
+        else
+            return 0;//TODO set constant
     }
 }

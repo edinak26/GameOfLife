@@ -43,7 +43,7 @@ public class InputParser {
         int inputGridWidth = parsedInputGrid.get(0).length;
         boolean isInputGridFitResultGrid = inputGridHeight<=parsedHeight && inputGridWidth<=parsedWidth;
         if(!isInputGridFitResultGrid)
-            throw new RuntimeException();
+            throw new RuntimeException();//TODO add message
     }
 
     public int getHeight() {

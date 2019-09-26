@@ -1,30 +1,40 @@
 import field.Cell;
+import field.Grid;
 
 import static field.Cell.DEAD;
+import static field.Cell.LIVE;
 
 public class GameField {
-    private Cell[][] grid;
-    GameField(int height, int width, Cell[][] startGrid){
-        grid = new Cell[height][width];
-        int startGridBeginX = (height-startGrid.length)/2;
-        int startGridBeginY = (width-startGrid[0].length)/2;
-        for(int i = 0; i<height;i++){
+    private Grid grid;
+    private int iterations;
+
+    GameField(Grid startGrid, int iterations) {
+        this.grid = startGrid;
+        this.iterations = iterations;
+    }
+
+    public Grid getNextIterationGrid(){
+        int height = grid.getHeight();
+        int width = grid.getWidth();
+        Grid nextGrid = new Grid(height,width);
+        for(int i = 0; i< height;i++){
             for(int j = 0; j<width;j++){
-                grid[i][j] = DEAD;
+                Cell oldCell = grid.getCell(i,j);
+                int neighbourValue = grid.getNeighbourValue(i,j);
+                Cell nextCell = getNextCell(oldCell,neighbourValue);
+                nextGrid.setCell(i,j,nextCell);
             }
         }
+        return nextGrid;
+    }
 
-        for(int i = 0;i<startGrid.length;i++){
-            for(int j = 0; j<startGrid[0].length;j++){
-                grid[i+startGridBeginX][j+startGridBeginY] = startGrid[i][j];
-            }
-        }
-
-        for(int i = 0; i<height;i++){
-            for(int j = 0; j<width;j++){
-                System.out.print(grid[i][j].getValue());
-            }
-            System.out.println();
+    private Cell getNextCell(Cell oldCell, int neighbourValue){
+        if(neighbourValue == 3) {
+            return LIVE;
+        } else if(neighbourValue == 2){
+            return oldCell;
+        } else {
+            return DEAD;
         }
     }
 }
