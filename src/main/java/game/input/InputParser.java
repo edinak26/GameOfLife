@@ -6,6 +6,8 @@ import game.input.exceptions.IncorrectInputFileFormatException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static game.input.exceptions.ExceptionMessages.INCORRECT_INPUT_GRID_SIZE;
+
 public class InputParser implements ParsedInput{
     private InputValidator validator;
     private int parsedHeight;
@@ -17,12 +19,13 @@ public class InputParser implements ParsedInput{
             validator = new InputValidator(input);
     }
 
-    public void parse() throws IncorrectInputFileFormatException, IncorrectInputFileDataException {
+    public ParsedInput parse() throws IncorrectInputFileFormatException, IncorrectInputFileDataException {
         validator.validate();
         parseSize(validator.getSizeLine());
         parseIterations(validator.getIterationsLine());
         parseInputGrid(validator.getGridLines());
         checkSize();
+        return this;
     }
 
     private void parseSize(String sizeLine) {
@@ -46,7 +49,7 @@ public class InputParser implements ParsedInput{
         int inputGridWidth = parsedInputGrid.get(0).length;
         boolean isInputGridFitInitialGrid = inputGridHeight<=parsedHeight && inputGridWidth<=parsedWidth;
         if(!isInputGridFitInitialGrid)
-            throw new IncorrectInputFileDataException("");//TODO add message
+            throw new IncorrectInputFileDataException(INCORRECT_INPUT_GRID_SIZE);
     }
 
     public int getHeight() {

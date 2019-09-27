@@ -1,6 +1,5 @@
 package game;
 
-import game.Game;
 import game.entities.Grid;
 import game.output.Writer;
 import game.input.*;
@@ -25,20 +24,19 @@ public class GameController {
         try {
             return FileReader.readInputFile();
         } catch (IOException | InvalidPathException e) {
-            writeMessage(e.getMessage());
+            writeMessageToOutputFile(e.getMessage());
             throw e;
         }
     }
 
     private ParsedInput parseInput(List<String> input) throws Exception {
-        InputParser parser = new InputParser(input);
         try {
-            parser.parse();
+            InputParser parser = new InputParser(input);
+            return parser.parse();
         } catch (IncorrectInputFileFormatException | IncorrectInputFileDataException e) {
-            writeMessage(e.getMessage());
+            writeMessageToOutputFile(e.getMessage());
             throw e;
         }
-        return parser;
     }
 
     private Game initGame(ParsedInput parsedInput) {
@@ -47,11 +45,19 @@ public class GameController {
         return new Game(initialGrid, parsedInput.getIterations());
     }
 
-    public void saveGrid(Grid grid) throws IOException {
+    public void calcOutputGrid(){
+        game.calcResultGrid();
+    }
+
+    public void saveResult() throws IOException {
+        writeGridToOutputFile(game.getGrid());
+    }
+
+    private void writeGridToOutputFile(Grid grid) throws IOException {
         Writer.writeOutputFile(grid.toStringList());
     }
 
-    private void writeMessage(String message) throws IOException {
+    private void writeMessageToOutputFile(String message) throws IOException {
         Writer.writeOutputFile(Collections.singletonList(message));
     }
 }

@@ -66,15 +66,6 @@ public class Grid {
         return grid[0].length;
     }
 
-    public void print() {
-        for (int i = 0; i < getHeight(); i++) {
-            for (int j = 0; j < getWidth(); j++) {
-                System.out.print(grid[i][j]);
-            }
-            System.out.println();
-        }
-    }
-
     public Cell getCell(int x, int y) {
         return grid[x][y];
     }

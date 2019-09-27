@@ -1,8 +1,11 @@
 package game.entities;
 
+import static game.GameConstants.DEAD_CELL_CHARACTER;
+import static game.GameConstants.LIVE_CELL_CHARACTER;
+
 public enum Cell {
-    LIVE("O", 1),
-    DEAD("X", 0);
+    LIVE(LIVE_CELL_CHARACTER, 1),
+    DEAD(DEAD_CELL_CHARACTER, 0);
     private String character;
     private int value;
 

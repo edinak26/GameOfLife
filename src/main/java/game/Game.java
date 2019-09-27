@@ -2,6 +2,7 @@ package game;
 
 import game.entities.Cell;
 import game.entities.Grid;
+import game.output.Writer;
 
 import java.io.IOException;
 
@@ -17,11 +18,10 @@ public class Game {
         this.iterations = iterations;
     }
 
-    public Grid calcResultGrid() throws IOException, InterruptedException {
+    public void calcResultGrid(){
         for(int i=0;i<iterations;i++){
             grid = getNextIterationGrid();
         }
-        return grid;
     }
 
     public Grid getNextIterationGrid(){
@@ -47,5 +47,9 @@ public class Game {
         } else {
             return DEAD;
         }
+    }
+
+    public Grid getGrid() {
+        return grid;
     }
 }

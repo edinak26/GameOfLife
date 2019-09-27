@@ -1,5 +1,7 @@
-2 20
-10
-XOX
-OXO
-XOX
+20 20
+9
+O-O-O
+-O-O-
+O-O-O
+-OOO-
+O-OOO
