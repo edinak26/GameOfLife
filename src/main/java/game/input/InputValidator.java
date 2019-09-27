@@ -1,8 +1,11 @@
-package field.read;
+package game.input;
+
+import game.input.exceptions.ExceptionMessages;
+import game.input.exceptions.IncorrectInputFileFormatException;
 
 import java.util.List;
 
-public class InputValidator implements ValidateMessages {
+public class InputValidator implements ExceptionMessages {
     private static int GREED_FIRST_LINE_NUMBER = 3;
 
     private final List<String> input;
@@ -20,13 +23,13 @@ public class InputValidator implements ValidateMessages {
     private void validateSize() throws IncorrectInputFileFormatException {
         String sizeLine = getSizeLine();
         if(!sizeLine.matches("^[0-9]+ [0-9]+$"))
-            throw new IncorrectInputFileFormatException(ValidateMessages.INCORRECT_SIZE_LINE_FORMAT);
+            throw new IncorrectInputFileFormatException(ExceptionMessages.INCORRECT_SIZE_LINE_FORMAT);
     }
 
     private void validateIterations() throws IncorrectInputFileFormatException {
         String iterationsLine = getIterationsLine();
         if(!iterationsLine.matches("^[0-9]+$"))
-            throw new IncorrectInputFileFormatException(ValidateMessages.INCORRECT_ITERATIONS_LINE_FORMAT);
+            throw new IncorrectInputFileFormatException(ExceptionMessages.INCORRECT_ITERATIONS_LINE_FORMAT);
     }
 
     private void validateGrid() throws IncorrectInputFileFormatException {
@@ -42,7 +45,7 @@ public class InputValidator implements ValidateMessages {
             if(!gridLine.matches("^[OX]+$")) {
                 int gridLineIndex = gridLines.indexOf(gridLine);
                 int lineNumber = GREED_FIRST_LINE_NUMBER + gridLineIndex;
-                throw new IncorrectInputFileFormatException(ValidateMessages.INCORRECT_GREED_CHARACTERS_IN + lineNumber);
+                throw new IncorrectInputFileFormatException(ExceptionMessages.INCORRECT_GREED_CHARACTERS_IN + lineNumber);
             }
         }
     }
@@ -53,7 +56,7 @@ public class InputValidator implements ValidateMessages {
             if(gridLine.length()!=width) {
                 int gridLineIndex = gridLines.indexOf(gridLine);
                 int lineNumber = GREED_FIRST_LINE_NUMBER + gridLineIndex;
-                throw new IncorrectInputFileFormatException(ValidateMessages.INCORRECT_GREED_WIDTH_IN + lineNumber);
+                throw new IncorrectInputFileFormatException(ExceptionMessages.INCORRECT_GREED_WIDTH_IN + lineNumber);
             }
         }
     }

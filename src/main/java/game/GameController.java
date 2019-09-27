@@ -1,6 +1,11 @@
-import field.Grid;
-import field.Writer;
-import field.read.*;
+package game;
+
+import game.Game;
+import game.entities.Grid;
+import game.output.Writer;
+import game.input.*;
+import game.input.exceptions.IncorrectInputFileDataException;
+import game.input.exceptions.IncorrectInputFileFormatException;
 
 import java.io.IOException;
 import java.nio.file.InvalidPathException;

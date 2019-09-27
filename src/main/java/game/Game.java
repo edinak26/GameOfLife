@@ -1,17 +1,18 @@
-import field.Cell;
-import field.Grid;
-import field.Writer;
+package game;
+
+import game.entities.Cell;
+import game.entities.Grid;
 
 import java.io.IOException;
 
-import static field.Cell.DEAD;
-import static field.Cell.LIVE;
+import static game.entities.Cell.DEAD;
+import static game.entities.Cell.LIVE;
 
 public class Game {
     private Grid grid;
     private int iterations;
 
-    Game(Grid startGrid, int iterations) {
+    public Game(Grid startGrid, int iterations) {
         this.grid = startGrid;
         this.iterations = iterations;
     }

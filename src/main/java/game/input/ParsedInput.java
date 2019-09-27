@@ -1,4 +1,4 @@
-package field.read;
+package game.input;
 
 import java.util.List;
 

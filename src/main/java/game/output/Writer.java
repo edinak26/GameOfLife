@@ -1,4 +1,4 @@
-package field;
+package game.output;
 
 import java.io.IOException;
 import java.nio.file.Files;

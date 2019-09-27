@@ -1,4 +1,4 @@
-package field;
+package game.entities;
 
 public enum Cell {
     LIVE("O", 1),

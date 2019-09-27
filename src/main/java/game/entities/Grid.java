@@ -1,9 +1,9 @@
-package field;
+package game.entities;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import static field.Cell.DEAD;
+import static game.entities.Cell.DEAD;
 
 public class Grid {
     private static final int GRID_OUT_CELL_VALUE = 0;

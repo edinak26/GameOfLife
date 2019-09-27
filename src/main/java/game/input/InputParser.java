@@ -1,4 +1,7 @@
-package field.read;
+package game.input;
+
+import game.input.exceptions.IncorrectInputFileDataException;
+import game.input.exceptions.IncorrectInputFileFormatException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,9 +44,9 @@ public class InputParser implements ParsedInput{
     private void checkSize() throws IncorrectInputFileDataException {
         int inputGridHeight = parsedInputGrid.size();
         int inputGridWidth = parsedInputGrid.get(0).length;
-        boolean isInputGridFitResultGrid = inputGridHeight<=parsedHeight && inputGridWidth<=parsedWidth;
-        if(!isInputGridFitResultGrid)
-            throw new IncorrectInputFileDataException();//TODO add message
+        boolean isInputGridFitInitialGrid = inputGridHeight<=parsedHeight && inputGridWidth<=parsedWidth;
+        if(!isInputGridFitInitialGrid)
+            throw new IncorrectInputFileDataException("");//TODO add message
     }
 
     public int getHeight() {
