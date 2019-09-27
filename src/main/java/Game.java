@@ -1,16 +1,26 @@
 import field.Cell;
 import field.Grid;
+import field.Writer;
+
+import java.io.IOException;
 
 import static field.Cell.DEAD;
 import static field.Cell.LIVE;
 
-public class GameField {
+public class Game {
     private Grid grid;
     private int iterations;
 
-    GameField(Grid startGrid, int iterations) {
+    Game(Grid startGrid, int iterations) {
         this.grid = startGrid;
         this.iterations = iterations;
+    }
+
+    public Grid calcResultGrid() throws IOException, InterruptedException {
+        for(int i=0;i<iterations;i++){
+            grid = getNextIterationGrid();
+        }
+        return grid;
     }
 
     public Grid getNextIterationGrid(){

@@ -11,25 +11,25 @@ public class InputValidator implements ValidateMessages {
         this.input = input;
     }
 
-    public void validate(){
+    public void validate() throws IncorrectInputFileFormatException {
         validateSize();
         validateIterations();
         validateGrid();
     }
 
-    private void validateSize() {
+    private void validateSize() throws IncorrectInputFileFormatException {
         String sizeLine = getSizeLine();
         if(!sizeLine.matches("^[0-9]+ [0-9]+$"))
             throw new IncorrectInputFileFormatException(ValidateMessages.INCORRECT_SIZE_LINE_FORMAT);
     }
 
-    private void validateIterations() {
+    private void validateIterations() throws IncorrectInputFileFormatException {
         String iterationsLine = getIterationsLine();
         if(!iterationsLine.matches("^[0-9]+$"))
             throw new IncorrectInputFileFormatException(ValidateMessages.INCORRECT_ITERATIONS_LINE_FORMAT);
     }
 
-    private void validateGrid() {
+    private void validateGrid() throws IncorrectInputFileFormatException {
         List<String> gridLines = getGridLines();
         validateGridCharacters(gridLines);
         validateGridWidth(gridLines);
@@ -37,7 +37,7 @@ public class InputValidator implements ValidateMessages {
 
     }
 
-    private void validateGridCharacters(List<String> gridLines) {
+    private void validateGridCharacters(List<String> gridLines) throws IncorrectInputFileFormatException {
         for(String gridLine : gridLines){
             if(!gridLine.matches("^[OX]+$")) {
                 int gridLineIndex = gridLines.indexOf(gridLine);
@@ -47,7 +47,7 @@ public class InputValidator implements ValidateMessages {
         }
     }
 
-    private void validateGridWidth(List<String> gridLines) {
+    private void validateGridWidth(List<String> gridLines) throws IncorrectInputFileFormatException {
         int width = gridLines.get(0).length();
         for(String gridLine : gridLines){
             if(gridLine.length()!=width) {

@@ -3,7 +3,7 @@ package field.read;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class InputParser {
+public class InputParser implements ParsedInput{
     private InputValidator validator;
     private int parsedHeight;
     private int parsedWidth;
@@ -14,7 +14,7 @@ public class InputParser {
             validator = new InputValidator(input);
     }
 
-    public void parse(){
+    public void parse() throws IncorrectInputFileFormatException, IncorrectInputFileDataException {
         validator.validate();
         parseSize(validator.getSizeLine());
         parseIterations(validator.getIterationsLine());
@@ -38,12 +38,12 @@ public class InputParser {
                 .collect(Collectors.toList());
     }
 
-    private void checkSize() {
+    private void checkSize() throws IncorrectInputFileDataException {
         int inputGridHeight = parsedInputGrid.size();
         int inputGridWidth = parsedInputGrid.get(0).length;
         boolean isInputGridFitResultGrid = inputGridHeight<=parsedHeight && inputGridWidth<=parsedWidth;
         if(!isInputGridFitResultGrid)
-            throw new RuntimeException();//TODO add message
+            throw new IncorrectInputFileDataException();//TODO add message
     }
 
     public int getHeight() {

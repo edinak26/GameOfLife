@@ -1,8 +1,8 @@
 package field;
 
 public enum Cell {
-    LIVE("X", 1),
-    DEAD("O", 0);
+    LIVE("O", 1),
+    DEAD("X", 0);
     private String character;
     private int value;
 
