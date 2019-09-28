@@ -2,16 +2,13 @@ package game;
 
 import game.entities.Cell;
 import game.entities.Grid;
-import game.output.Writer;
-
-import java.io.IOException;
 
 import static game.entities.Cell.DEAD;
 import static game.entities.Cell.LIVE;
 
 public class Game {
     private Grid grid;
-    private int iterations;
+    private final int iterations;
 
     public Game(Grid startGrid, int iterations) {
         this.grid = startGrid;

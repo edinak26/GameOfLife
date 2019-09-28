@@ -1,31 +1,34 @@
-package game.input;
+package game.input.parser;
 
 import game.input.exceptions.IncorrectInputFileDataException;
-import game.input.exceptions.IncorrectInputFileFormatException;
+import game.input.validator.ValidatedInput;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static game.input.exceptions.ExceptionMessages.INCORRECT_INPUT_GRID_SIZE;
 
-public class InputParser implements ParsedInput{
-    private InputValidator validator;
+public class Parser implements InputParser, ParsedInput {
+    private final ValidatedInput input;
     private int parsedHeight;
     private int parsedWidth;
     private int parsedIterations;
     private List<String[]> parsedInputGrid;
 
-    public InputParser(List<String> input){
-            validator = new InputValidator(input);
+    public Parser(ValidatedInput input){
+            this.input = input;
     }
 
-    public ParsedInput parse() throws IncorrectInputFileFormatException, IncorrectInputFileDataException {
-        validator.validate();
-        parseSize(validator.getSizeLine());
-        parseIterations(validator.getIterationsLine());
-        parseInputGrid(validator.getGridLines());
-        checkSize();
+    public ParsedInput parse() throws IncorrectInputFileDataException {
+        parseInput();
+        checkParsedInput();
         return this;
+    }
+
+    private void parseInput(){
+        parseSize(input.getSizeLine());
+        parseIterations(input.getIterationsLine());
+        parseInputGrid(input.getInputGridLines());
     }
 
     private void parseSize(String sizeLine) {
@@ -44,7 +47,7 @@ public class InputParser implements ParsedInput{
                 .collect(Collectors.toList());
     }
 
-    private void checkSize() throws IncorrectInputFileDataException {
+    private void checkParsedInput() throws IncorrectInputFileDataException {//TODO add checks
         int inputGridHeight = parsedInputGrid.size();
         int inputGridWidth = parsedInputGrid.get(0).length;
         boolean isInputGridFitInitialGrid = inputGridHeight<=parsedHeight && inputGridWidth<=parsedWidth;

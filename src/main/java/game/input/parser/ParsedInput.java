@@ -1,4 +1,4 @@
-package game.input;
+package game.input.parser;
 
 import java.util.List;
 

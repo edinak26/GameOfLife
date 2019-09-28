@@ -1,6 +1,11 @@
 package game;
 
 import game.entities.Grid;
+import game.input.parser.Parser;
+import game.input.parser.ParsedInput;
+import game.input.validator.InputValidator;
+import game.input.validator.Validator;
+import game.input.validator.ValidatedInput;
 import game.output.Writer;
 import game.input.*;
 import game.input.exceptions.IncorrectInputFileDataException;
@@ -31,7 +36,9 @@ public class GameController {
 
     private ParsedInput parseInput(List<String> input) throws Exception {
         try {
-            InputParser parser = new InputParser(input);
+            InputValidator validator = new Validator(input);
+            ValidatedInput validatedInput = validator.validate();
+            Parser parser = new Parser(validatedInput);
             return parser.parse();
         } catch (IncorrectInputFileFormatException | IncorrectInputFileDataException e) {
             writeMessageToOutputFile(e.getMessage());
