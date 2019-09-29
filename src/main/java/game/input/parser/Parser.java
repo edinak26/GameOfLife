@@ -6,7 +6,7 @@ import game.input.validator.ValidatedInput;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static game.input.exceptions.ExceptionMessages.INCORRECT_INPUT_GRID_SIZE;
+import static game.input.exceptions.ExceptionMessages.*;
 
 public class Parser implements InputParser, ParsedInput {
     private final ValidatedInput input;
@@ -48,12 +48,31 @@ public class Parser implements InputParser, ParsedInput {
     }
 
     private void checkParsedInput() throws IncorrectInputFileDataException {//TODO add checks
+        checkHeight();
+        checkWidth();
+        checkInputGridSize();
+    }
+
+    private void checkWidth() throws IncorrectInputFileDataException {
+        boolean isHeightPositiveNumber = getHeight() >=0;
+        if(!isHeightPositiveNumber)
+            throw new IncorrectInputFileDataException(INCORRECT_HEIGHT_VALUE);
+    }
+
+    private void checkHeight() throws IncorrectInputFileDataException {
+        boolean isWidthPositiveNumber = getHeight() >=0;
+        if(!isWidthPositiveNumber)
+            throw new IncorrectInputFileDataException(INCORRECT_WIDTH_VALUE);
+    }
+
+    private void checkInputGridSize() throws IncorrectInputFileDataException {
         int inputGridHeight = parsedInputGrid.size();
         int inputGridWidth = parsedInputGrid.get(0).length;
         boolean isInputGridFitInitialGrid = inputGridHeight<=parsedHeight && inputGridWidth<=parsedWidth;
         if(!isInputGridFitInitialGrid)
             throw new IncorrectInputFileDataException(INCORRECT_INPUT_GRID_SIZE);
     }
+
 
     public int getHeight() {
         return parsedHeight;
