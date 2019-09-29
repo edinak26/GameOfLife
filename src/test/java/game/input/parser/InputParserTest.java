@@ -4,13 +4,10 @@ import game.input.exceptions.IncorrectInputFileDataException;
 import game.input.exceptions.IncorrectInputFileFormatException;
 import game.input.validator.ValidatedInput;
 import game.input.validator.Validator;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class InputParserTest {
 

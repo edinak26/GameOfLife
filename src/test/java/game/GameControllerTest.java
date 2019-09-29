@@ -12,13 +12,13 @@ import static org.junit.Assert.*;
 public class GameControllerTest {
     private static final String PATTERNS_PATH = "src/test/resources/game/patterns/";
 
-    public List<String> calcResult(String path) throws Exception {
+    private List<String> calcResult(String path) throws Exception {
         GameController controller = new GameController(path);
         controller.calcResultGrid();
         return controller.getGrid();
     }
 
-    public List<String> getAllLines(String path) throws IOException {
+    private List<String> getAllLines(String path) throws IOException {
         return Files.readAllLines(Paths.get(path));
     }
 
