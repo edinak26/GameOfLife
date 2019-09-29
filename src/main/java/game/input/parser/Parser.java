@@ -56,13 +56,13 @@ public class Parser implements InputParser, ParsedInput {
     private void checkWidth() throws IncorrectInputFileDataException {
         boolean isHeightPositiveNumber = getHeight() >=0;
         if(!isHeightPositiveNumber)
-            throw new IncorrectInputFileDataException(INCORRECT_HEIGHT_VALUE);
+            throw new IncorrectInputFileDataException(INCORRECT_FILE_DATA_HEIGHT_VALUE);
     }
 
     private void checkHeight() throws IncorrectInputFileDataException {
         boolean isWidthPositiveNumber = getHeight() >=0;
         if(!isWidthPositiveNumber)
-            throw new IncorrectInputFileDataException(INCORRECT_WIDTH_VALUE);
+            throw new IncorrectInputFileDataException(INCORRECT_FILE_DATA_WIDTH_VALUE);
     }
 
     private void checkInputGridSize() throws IncorrectInputFileDataException {
@@ -70,7 +70,7 @@ public class Parser implements InputParser, ParsedInput {
         int inputGridWidth = parsedInputGrid.get(0).length;
         boolean isInputGridFitInitialGrid = inputGridHeight<=parsedHeight && inputGridWidth<=parsedWidth;
         if(!isInputGridFitInitialGrid)
-            throw new IncorrectInputFileDataException(INCORRECT_INPUT_GRID_SIZE);
+            throw new IncorrectInputFileDataException(INCORRECT_FILE_DATA_INPUT_GRID_SIZE);
     }
 
 
